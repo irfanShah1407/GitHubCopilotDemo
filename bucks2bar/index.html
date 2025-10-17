@@ -18,8 +18,25 @@
 
     <!-- changed code: main content container -->
     <main class="container mt-4">
-        <h1 class="text-light bg-dark p-3 rounded">Welcome to Bucks2Bar</h1>
-        <p>This is the main page of the Bucks2Bar project.</p>
+        <!-- Tabs nav -->
+        <ul class="nav nav-tabs" id="bucks2barTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="data-tab" data-bs-toggle="tab" data-bs-target="#data" type="button" role="tab" aria-controls="data" aria-selected="true">Data</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart" type="button" role="tab" aria-controls="chart" aria-selected="false">Chart</button>
+          </li>
+        </ul>
+
+        <!-- Tabs content -->
+        <div class="tab-content p-3 border border-top-0 rounded-bottom bg-light" id="bucks2barTabsContent">
+          <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
+            <p class="mb-0">Placeholder: Data tab content goes here. Add tables, lists or data controls.</p>
+          </div>
+          <div class="tab-pane fade" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+            <p class="mb-0">Placeholder: Chart tab content goes here. Add charts or visualizations.</p>
+          </div>
+        </div>
     </main>
 
     <!-- Bootstrap JS bundle -->
