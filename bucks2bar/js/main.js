@@ -63,9 +63,51 @@
     });
   }
 
+function setupChartDownload(chartInstance) {
+    const downloadBtn = document.getElementById('downloadChartBtn');
+    const openBtn = document.getElementById('openChartBtn');
+
+    if (!downloadBtn && !openBtn) return;
+
+    function getDataUrl() {
+      try {
+        if (chartInstance && typeof chartInstance.toBase64Image === 'function') {
+          return chartInstance.toBase64Image(); // Chart.js preferred
+        }
+      } catch (e) {
+        // fall through to canvas fallback
+      }
+      // Fallback: use the actual canvas id used in index.html
+      const canvas = document.getElementById('chartCanvas');
+      return canvas ? canvas.toDataURL('image/png') : null;
+    }
+
+    downloadBtn && downloadBtn.addEventListener('click', () => {
+      const url = getDataUrl();
+      if (!url) { alert('Chart image not available.'); return; }
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'bucks2bar-monthly.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+
+    openBtn && openBtn.addEventListener('click', () => {
+      const url = getDataUrl();
+      if (!url) { alert('Chart image not available.'); return; }
+      window.open(url, '_blank', 'noopener');
+    });
+  }
+
+  // Call the setup so the buttons are wired
+  setupChartDownload(chart);
+
   // Initial render
   readDataAndUpdate();
 
   // Expose for debugging (optional)
   window.bucks2bar = { months, readDataAndUpdate };
 })();
+
+
